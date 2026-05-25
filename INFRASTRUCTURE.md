@@ -6,11 +6,13 @@
 | --- | --- | --- | --- |
 | Vercel | `problemarket` project | https://problemarket.vercel.app | Production deployment ready |
 | Cloudflare Workers | `problemarket-ipfs-api` | https://problemarket-ipfs-api.mariano-906.workers.dev | Deployed; Pinata secret pending |
-| GitHub | Planned public repository | https://github.com/viveviviendo/problemarket | Pending repository creation; account and name availability verified |
+| GitHub | Public repository | https://github.com/viveviviendo/problemarket | Created and initial code pushed |
 
 ## Vercel Configuration
 
 Project: `viveviendos-projects/problemarket`
+
+Git integration: connected to `https://github.com/viveviviendo/problemarket`.
 
 Configured Production variables:
 
@@ -63,12 +65,14 @@ npx wrangler deploy
 
 Wrangler 4 requires Node.js 22 or later.
 
-## GitHub Blocker
+## GitHub Configuration
 
-The authenticated GitHub account is `viveviviendo`, and the `problemarket` repository name was verified as unused. The GitHub connector enabled in this workspace exposes profile/repository reads and file, branch and pull-request operations only for an existing repository. It does not expose:
+Repository: `https://github.com/viveviviendo/problemarket`
 
-- Repository creation.
-- Actions secrets management.
-- Branch protection settings.
+GitHub Actions secrets configured:
 
-GitHub CLI is installed locally as the terminal fallback. Once GitHub CLI authorization succeeds, push this workspace and configure required CI checks and Vercel secrets as described in `DEPLOY.md`.
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+The repository was created and provisioned through authenticated GitHub CLI because the available GitHub connector does not expose repository creation, Actions secrets or branch-protection writes.
