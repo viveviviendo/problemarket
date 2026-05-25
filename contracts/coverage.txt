@@ -1,0 +1,8 @@
+ProblemMarket coverage report
+Generated from: npm run coverage --workspace contracts
+
+Final security-refinement run:
+- ProblemMarket.sol: 100% statements, 87.50% branches, 100% functions, 98.98% lines
+- All contracts (including attack mocks): 98.86% statements, 87.00% branches, 96.77% functions, 98.28% lines
+
+Test result: 15 passing.

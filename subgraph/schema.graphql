@@ -1,0 +1,38 @@
+type Problem @entity(immutable: false) {
+  id: ID!
+  owner: Bytes!
+  bounty: BigInt!
+  ownerFee: BigInt!
+  category: Int!
+  status: String!
+  solver: Bytes
+  netSolver: BigInt
+  totalFees: BigInt
+  createdAt: BigInt!
+  solutions: [Solution!]! @derivedFrom(field: "problem")
+}
+
+type Solution @entity(immutable: true) {
+  id: ID!
+  problem: Problem!
+  solver: Bytes!
+  solutionURI: String!
+  submittedAt: BigInt!
+}
+
+type UserStats @entity(immutable: false) {
+  id: ID!
+  problemsCreated: BigInt!
+  solutionsSubmitted: BigInt!
+  usdcEarned: BigInt!
+  usdcFunded: BigInt!
+}
+
+type ProtocolStats @entity(immutable: false) {
+  id: ID!
+  problems: BigInt!
+  solved: BigInt!
+  escrowFunded: BigInt!
+  volumePaid: BigInt!
+  feesCollected: BigInt!
+}

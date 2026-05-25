@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    name: Contracts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install monorepo dependencies
+        run: npm ci
+      - name: Compile contracts
+        run: npm run compile --workspace contracts
+      - name: Run contract tests
+        run: npm test --workspace contracts
+      - name: Generate coverage
+        run: npm run coverage --workspace contracts
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: solidity-coverage
+          path: contracts/coverage/
+          if-no-files-found: error
+
+  web:
+    name: Web
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install monorepo dependencies
+        run: npm ci
+      - name: Build frontend and generated contract ABI
+        run: npm run build --workspace web
+
+  subgraph:
+    name: Subgraph
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: subgraph/package-lock.json
+      - name: Install subgraph dependencies
+        working-directory: subgraph
+        run: npm ci
+      - name: Codegen and build
+        working-directory: subgraph
+        run: npm run codegen && npm run build
+
+  worker:
+    name: Cloudflare Worker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: workers/ipfs-api/package-lock.json
+      - name: Install worker dependencies
+        working-directory: workers/ipfs-api
+        run: npm ci
+      - name: Type-check Worker
+        working-directory: workers/ipfs-api
+        run: npm run build
+      - name: Validate Worker bundle
+        working-directory: workers/ipfs-api
+        run: npx wrangler deploy --dry-run --outdir .wrangler/dry-run

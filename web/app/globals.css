@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #090c0b;
+  color: #eaf2ef;
+  font-family: var(--font-geist), Inter, Arial, sans-serif;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 0%, rgba(0,255,136,.1), transparent 36%);
+}
+input, textarea, select { outline: none; }
+input:focus, textarea:focus, select:focus { border-color: rgba(0,255,136,.6); }

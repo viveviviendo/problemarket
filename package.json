@@ -1,0 +1,18 @@
+{
+  "name": "problemarket",
+  "private": true,
+  "workspaces": [
+    "contracts",
+    "web"
+  ],
+  "overrides": {
+    "lodash": "^4.18.1"
+  },
+  "scripts": {
+    "compile": "npm run compile --workspace contracts",
+    "test": "npm run test --workspace contracts",
+    "coverage": "npm run coverage --workspace contracts",
+    "dev": "npm run dev --workspace web",
+    "build": "npm run build --workspace web"
+  }
+}

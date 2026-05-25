@@ -1,0 +1,19 @@
+name = "problemarket-ipfs-api"
+main = "src/index.ts"
+compatibility_date = "2026-05-25"
+workers_dev = true
+
+[vars]
+FRONTEND_ORIGIN = "https://problemarket.vercel.app"
+IPFS_GATEWAY = "https://ipfs.io/ipfs"
+
+[secrets]
+required = ["PINATA_JWT"]
+
+[[ratelimits]]
+name = "UPLOAD_RATE_LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 20
+  period = 60

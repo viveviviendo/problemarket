@@ -1,0 +1,35 @@
+specVersion: 1.0.0
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ProblemMarket
+    network: base-sepolia
+    source:
+      address: "0x0000000000000000000000000000000000000000"
+      abi: ProblemMarket
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - Problem
+        - Solution
+        - UserStats
+        - ProtocolStats
+      abis:
+        - name: ProblemMarket
+          file: ./abis/ProblemMarket.json
+      eventHandlers:
+        - event: ProblemCreated(indexed uint256,indexed address,uint256,uint256,uint8)
+          handler: handleProblemCreated
+        - event: SolutionSubmitted(indexed uint256,indexed address,string)
+          handler: handleSolutionSubmitted
+        - event: ProblemSolved(indexed uint256,indexed address,uint256,uint256)
+          handler: handleProblemSolved
+        - event: ProblemCancelled(indexed uint256,uint256)
+          handler: handleProblemCancelled
+        - event: ProblemDisputed(indexed uint256,indexed address)
+          handler: handleProblemDisputed
+      file: ./src/mapping.ts

@@ -1,0 +1,7 @@
+[
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"problemId","type":"uint256"},{"indexed":true,"name":"owner","type":"address"},{"indexed":false,"name":"bounty","type":"uint256"},{"indexed":false,"name":"ownerFee","type":"uint256"},{"indexed":false,"name":"category","type":"uint8"}],"name":"ProblemCreated","type":"event"},
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"problemId","type":"uint256"},{"indexed":true,"name":"solver","type":"address"},{"indexed":false,"name":"solutionURI","type":"string"}],"name":"SolutionSubmitted","type":"event"},
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"problemId","type":"uint256"},{"indexed":true,"name":"solver","type":"address"},{"indexed":false,"name":"netSolver","type":"uint256"},{"indexed":false,"name":"totalFees","type":"uint256"}],"name":"ProblemSolved","type":"event"},
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"problemId","type":"uint256"},{"indexed":false,"name":"refunded","type":"uint256"}],"name":"ProblemCancelled","type":"event"},
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"problemId","type":"uint256"},{"indexed":true,"name":"raisedBy","type":"address"}],"name":"ProblemDisputed","type":"event"}
+]
